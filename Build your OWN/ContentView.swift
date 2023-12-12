@@ -11,7 +11,6 @@ struct ContentView: View {
     @State private var gameScore = 0
     @State private var randomValue = 0
     @State private var rotation = 0.0
-    @ State private var winMessage = ""
     var body: some View {
         NavigationView() {
             VStack {
@@ -32,12 +31,14 @@ struct ContentView: View {
                         }
                     }
                 }
-                
-                
             }
         }
+        NavigationLink("How To Play", destination: InstructionsView())
+            .font(Font.custom("Marker Felt",size: 24))
+            .padding()
+            Spacer()
     }
-              
+    
     func chooseRandom(times:Int) {
         if times > 0 {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -62,6 +63,25 @@ struct ContentView: View {
                 .background(.black).opacity(configuration.isPressed ? 0.0 : 1.0)
                 .foregroundColor(.white)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
+        }
+    }
+    
+    struct InstructionsView: View {
+        var body: some View {
+            VStack {
+                Image("dust 1").resizable().frame(width: 150, height:  150)
+                Text("Treasure Dice game").font(.title)
+                VStack(alignment: .leading){
+                    Text("in Treasure Dice you need get threechests to win the game. if you dont get three chests and get three dust u lose the game.")
+                        .padding()
+                    Text("first you press the roll button then it rolls and what ever u get thats what u have as one for right now.")
+                        .padding()
+                    Text("after getting three dust u will lose and get no gold and you dont win the game")
+                        .padding()
+                    Text("if you get three chests you will win the game and restart the game to play again")
+                    
+                }
+            }
         }
     }
     
